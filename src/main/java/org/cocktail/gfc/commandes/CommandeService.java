@@ -69,6 +69,18 @@ public class CommandeService {
     // ----------------------------
     // --------- LEVEL 2 ----------
     // ----------------------------
+    /**
+     * Retourne le montant total HT des Commandes pour les 3 derniers exercuces à partir de l'exercice de référence (inclus).
+     * Pour l'exercice de référence 2022, nous attendons :
+     * 2022 | 11.0
+     * 2021 | 48.30
+     * 2020 | 5
+     * @param exerciceReference exercice de référence sous forme d'un entier
+     * @return une Map dont la clé est l'exercice et la valeur le montant total HT des commandes associées à l'exercice.
+     */
+    public Map<Integer, BigDecimal> montantTotalHTSurTroisExercices(Integer exerciceReference) {
+        return Map.of();
+    }
 
     // ----------------------------
     // Classes internes
