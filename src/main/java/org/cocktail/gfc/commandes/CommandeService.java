@@ -2,11 +2,11 @@ package org.cocktail.gfc.commandes;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class CommandeService {
 
@@ -63,7 +63,11 @@ public class CommandeService {
      * sinon lance une exception IllegalArgumentException.
      */
     public Integer recupererExerciceOuvert() {
-        return -1;
+        return exerciceRepository.findAll().stream()
+                .filter(Exercice::estOuvert)
+                .findFirst()
+                .map(Exercice::value)
+                .orElseThrow();
     }
 
     // ----------------------------
@@ -79,7 +83,20 @@ public class CommandeService {
      * @return une Map dont la clé est l'exercice et la valeur le montant total HT des commandes associées à l'exercice.
      */
     public Map<Integer, BigDecimal> montantTotalHTSurTroisExercices(Integer exerciceReference) {
-        return Map.of();
+        // TODO 1.1 Alternative utilisant ChronoDate : preparer une CheatSheet
+        List<Commande> commandes = commandeRepository.findAll();
+        Map<Integer, BigDecimal> rapport = IntStream.range(0, 3)
+                .mapToObj(i -> exerciceReference - i)
+                .collect(Collectors.toMap(Function.identity(), exercice -> montantTotalHT(exercice, commandes)));
+        return rapport;
+    }
+
+    private BigDecimal montantTotalHT(Integer exercice, List<Commande> commandes) {
+        return commandes.stream()
+                .filter(c -> c.dateCreation.getYear() == exercice)
+                .flatMap(c -> c.lignes.stream())
+                .map(ligne -> ligne.prixUnitaire().multiply(BigDecimal.valueOf(ligne.quantite())))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     // ----------------------------
