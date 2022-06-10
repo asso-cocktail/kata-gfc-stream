@@ -27,13 +27,7 @@ public class CommandeService {
         }
     }
     record LigneCommande(String idLigne, String referenceArticle, Double quantite, BigDecimal prixUnitaire) {}
-    record Commande(String numeroCommande, String referenceFournisseur, List<LigneCommande> lignes, LocalDateTime dateCreation) {
-        BigDecimal getTotalHT() {
-            return lignes.stream()
-                    .map(l -> l.prixUnitaire.multiply(BigDecimal.valueOf(l.quantite)))
-                    .reduce(BigDecimal.ZERO, BigDecimal::add);
-        }
-    }
+    record Commande(String numeroCommande, String referenceFournisseur, List<LigneCommande> lignes, LocalDateTime dateCreation) {}
 
     interface ExerciceRepository {
         List<Exercice> findAll();
