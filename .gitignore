@@ -1,0 +1,73 @@
+# Operating System Files
+
+*.DS_Store
+Thumbs.db
+*~
+.#*
+#*
+*#
+
+# Build Files #
+
+bin
+target
+build/
+**/build/
+.gradle
+/.gradle/
+
+# Eclipse Project Files #
+
+.classpath
+.project
+.settings
+
+# IntelliJ IDEA Files #
+
+*.iml
+*.ipr
+*.iws
+*.idea
+
+# User-specific stuff:
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/dictionaries
+
+# Sensitive or high-churn files:
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.xml
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+
+# Gradle:
+.idea/**/gradle.xml
+.idea/**/libraries
+
+# IntelliJ
+out/
+
+# Spring Bootstrap artifacts
+
+dependency-reduced-pom.xml
+
+mem*.db
+
+README.html
+/.apt_generated/
+.factorypath
+**/velocity.log*
+
+app-spring/hs_err_pid23045\.log
+/gfc-services.log*
+/**/*.log*
+**/application-*.properties
+**/application-*.yml
+/classes/
+
+**/.attach_pid*
+**/*.hprof
+/.jpb/
